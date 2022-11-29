@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EasGameController {
 
-    @GetMapping("/easygame1")
+    @GetMapping("/easygame")
     public String easyGame() {
         String page = "<!DOCTYPE HTML>\n" +
                 "<html>\n" +
