@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Student;
+import com.example.demo.service.DBService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,18 +16,20 @@ import java.sql.Statement;
 @RestController
 public class EduController {
 
+    DBService dbs;
+
+    @Autowired
+    public EduController(DBService dbst) {
+        this.dbs = dbst;
+    }
+
     @GetMapping("/register")
     public String registerStudent(@RequestParam(value = "name") String stdName
             , @RequestParam(value = "family") String stdFamily
             , @RequestParam(value = "ssd") String stdNumber){
-        try (Connection conn = DriverManager.getConnection
-                ("jdbc:mysql://localhost:3306/edudb", "root", "");
-             Statement stmt = conn.createStatement();
-        ) {
-            stmt.executeUpdate("INSERT INTO STUDENT (name,family,stuid) values ('"+stdName+"','"+stdFamily+"','"+stdNumber+"')");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        Student tmp = new Student(stdName,stdFamily,stdNumber);
+        dbs.insert(tmp.getInsertQuery());
         System.out.println("We are going to reg "+stdName+stdFamily+stdNumber);
         return "OK";
     }
