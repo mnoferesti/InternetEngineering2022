@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.model.Lecturer;
 import com.example.demo.model.Student;
+import com.example.demo.service.DBService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,5 +23,11 @@ class Demo6ApplicationTests {
         String insertquery = test.getInsertQuery();
         Assertions.assertEquals(insertquery.toLowerCase(),
                 "INSERT INTO STUDENT (name,family,stuid) VALUES ('ali','alavi','123')".toLowerCase());
+    }
+    @Test
+    void testSelectStudent() {
+        DBService dbs = new DBService();
+        String result = dbs.selectStdent() ;
+        System.out.println(result);
     }
 }

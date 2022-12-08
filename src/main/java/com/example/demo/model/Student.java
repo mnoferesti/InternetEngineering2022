@@ -20,4 +20,6 @@ public class Student {
         return "INSERT INTO STUDENT (name,family,stuid) " +
                 "values ('"+name+"','"+family+"','"+ssd+"')";
     }
+
+
 }
