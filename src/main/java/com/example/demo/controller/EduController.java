@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Lecturer;
 import com.example.demo.model.Student;
 import com.example.demo.service.DBService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,16 @@ public class EduController {
         Student tmp = new Student(stdName,stdFamily,stdNumber);
         dbs.insert(tmp.getInsertQuery());
         System.out.println("We are going to reg "+stdName+stdFamily+stdNumber);
+        return "OK";
+    }
+
+    @GetMapping("/registerlecturer")
+    public String registerLecturer(@RequestParam(value = "name") String stdName
+            , @RequestParam(value = "family") String stdFamily){
+
+        Lecturer tmp = new Lecturer(stdName,stdFamily);
+        dbs.insert(tmp.getInsertQuery());
+        System.out.println("We are going to reg "+stdName+stdFamily);
         return "OK";
     }
 }
